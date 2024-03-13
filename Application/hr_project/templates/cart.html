@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | E-Shopper</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font_awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/price_range.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+
+
+<body>
+	<header id="header">
+		<div class="header-middle">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<img src="{% static 'pizza.jpg' %}" alt="" width="100" height="100"/>
+							<a href="index.html">
+							</a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="{% url 'wishlist' %}"><i class="fa fa-star"></i> Wishlist</a></li>
+								<li><a href="{% url 'checkout' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="{% url 'index' %}" class="active">Home</a></li>
+								<li><a href="{% url 'shop' %}" class="active">Shop</a></li>
+								<li><a href="{% url 'history' %}" class="active">History</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+<form method="POST">
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Item</td>
+                        <td class="description"></td>
+                        <td class="price">Price</td>
+                        <td class="quantity">Quantity</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% csrf_token %}
+
+                    {% for cos in cos_cumparaturis %}
+
+                    <tr>
+                        <td class="cart_product">
+                            <a href=""><img src={{cos.Pizza.link}} alt="" width="100px" height="100px"></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href="">{{cos.Pizza.nume}}</a></h4>
+
+                        </td>
+                        <td class="cart_price">
+                            <p>{{cos.Pizza.pret}} lei</p>
+                        </td>
+                        <td class="cart_quantity">
+                            <div class="cart_quantity_button">
+                                <!-- <a class="cart_quantity_up" href=""> + </a> -->
+
+                                <input class="cart_quantity_input" type="text" name='{{cos.Pizza.nume}}'
+                                       value={{cos.nr_produse}} autocomplete="off" size="10">
+
+
+                                <!-- <a class="cart_quantity_down" href=""> - </a> -->
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--/#cart_items-->
+    </section>
+    <!--	id="do_action"-->
+    <section>
+        <div class="container">
+
+
+            <div class="col-sm-6">
+
+                <div class="total_area">
+                    <ul>
+                        <li>Cart Sub Total <span>{{subtotal }} lei</span></li>
+                        <li>Shipping Cost <span>10 lei</span></li>
+                        <li>Total <span>{{suma}} lei</span></li>
+                    </ul>
+                    <button type="submit" class="btn btn-default check_out" name="Update">Update</button>
+                    <a class="btn btn-default check_out" href="{% url 'checkout' %}">Check Out</a>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section><!--/#do_action-->
+</form>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
