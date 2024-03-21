@@ -1,4 +1,4 @@
-Proiect realizat in echipa pentru faculatate:
+Proiect realizat in echipa pentru faculatate.
 Echipa:
-Gegia Alexandru
-Greaca Vlad
+Gegia Alexandru;
+Greaca Vlad;
